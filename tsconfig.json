@@ -8,7 +8,8 @@
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "include": [
     "test/**/*.ts",

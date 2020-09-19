@@ -22,7 +22,8 @@
         "@typescript-eslint/no-extraneous-class": "off",
         "@typescript-eslint/dot-notation": "off",
         "@typescript-eslint/no-floating-promises": "off",
-        "@typescript-eslint/no-misused-promises": "off"
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/no-unused-expressions": "off"
       }
     }
   ],

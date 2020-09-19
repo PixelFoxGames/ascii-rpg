@@ -1,21 +1,44 @@
-import { expect } from "chai";
 import UserModel from "../../../src/user/model/users.model";
+import Hellper from "../../helpers/hellper";
 
 describe("User.Model", () => {
-  it("should parse a User document", () => {
+  it("should parse a User document", (done) => {
+    const mockUser = Hellper.mock.user;
     const user = UserModel.fromDocument({
-      id: 1,
-      user_id: 1,
-      first_name: "Tiago",
-      last_name: "L",
-      username: "tihlok",
+      id: mockUser.uuid,
+      user_id: mockUser.id,
+      first_name: mockUser.firstName,
+      last_name: mockUser.lastName,
+      username: mockUser.username,
     });
 
-    expect(user._id).to.be.equal(1);
-    expect(user.user_id).to.be.equal(1);
-    expect(user.first_name).to.be.equal("Tiago");
-    expect(user.last_name).to.be.equal("L");
-    expect(user.username).to.be.equal("tihlok");
-    expect(user.is_deleted).to.be.false;
+    user._id.should.to.be.equal(mockUser.uuid);
+    user.user_id.should.to.be.equal(mockUser.id);
+    user.first_name.should.to.be.equal(mockUser.firstName);
+    user.last_name.should.to.be.equal(mockUser.lastName);
+    user.username.should.to.be.equal(mockUser.username);
+    user.is_deleted.should.to.be.false;
+
+    done();
+  });
+
+  it("should parse a User document, using _id", (done) => {
+    const mockUser = Hellper.mock.user;
+    const user = UserModel.fromDocument({
+      _id: mockUser.uuid,
+      user_id: mockUser.id,
+      first_name: mockUser.firstName,
+      last_name: mockUser.lastName,
+      username: mockUser.username,
+    });
+
+    user._id.should.to.be.equal(mockUser.uuid);
+    user.user_id.should.to.be.equal(mockUser.id);
+    user.first_name.should.to.be.equal(mockUser.firstName);
+    user.last_name.should.to.be.equal(mockUser.lastName);
+    user.username.should.to.be.equal(mockUser.username);
+    user.is_deleted.should.to.be.false;
+
+    done();
   });
 });
