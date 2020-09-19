@@ -1,6 +1,6 @@
 {
   "name": "@pixelfoxgames/ascii-rpg",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "PixelFox: ASCII RPG",
   "main": "src/server.ts",
   "author": "tihlok",
