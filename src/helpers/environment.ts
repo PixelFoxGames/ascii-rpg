@@ -1,8 +1,9 @@
 import { config } from "dotenv";
 
 config();
+config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env" });
 
-class Environment {
+export default class Environment {
   static get PORT(): number {
     return parseInt(process.env.PORT) || 9000;
   }
@@ -15,5 +16,3 @@ class Environment {
     return process.env.TELEGRAM_API_TOKEN;
   }
 }
-
-export default Environment;

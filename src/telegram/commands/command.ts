@@ -16,7 +16,7 @@ export default abstract class Command {
 
   command(command: string, execute: (ctx: TelegrafContext) => void) {
     this.bot.command(command, (ctx, next) => {
-      debug(command);
+      debug(`[${ctx.message.from.id}] @${ctx.message.from.username || "<>"}: /${command}`);
       return execute(ctx);
     });
   }

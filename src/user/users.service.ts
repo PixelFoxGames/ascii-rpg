@@ -25,10 +25,10 @@ export default class UserService {
   static async getUpdate(userModel: UserModel): Promise<UserModel> {
     userModel = UserModel.fromDocument(userModel);
     const existing = await this.findByID(userModel.user_id);
-    if (existing) {
-      return await this.update(userModel);
-    }
+    return existing ? await this.update(userModel) : await this.create(userModel);
+  }
 
+  static async create(userModel: UserModel): Promise<UserModel> {
     const user: any = new UserSchema(userModel);
     await user.save();
     return await this.findByID(user.user_id);
