@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "max-len": [
+      "error",
+      {
+        "code": 180,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "env": {
+    "es6": true
+  }
+}
