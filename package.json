@@ -1,5 +1,5 @@
 {
-  "name": "@pixelfoxgames/ascii-rpg",
+  "name": "@pixelfox/ascii-rpg",
   "version": "1.0.4",
   "description": "PixelFox: ASCII RPG",
   "main": "src/server.ts",
@@ -10,9 +10,6 @@
   "types": "./typings/index.d.ts",
   "engines": {
     "node": ">=14"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",
