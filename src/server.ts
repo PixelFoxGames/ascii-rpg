@@ -1,9 +1,9 @@
 import App from "./app";
+import Debug from "debug";
 
-const debug = require("debug")("ascii-rpg:server");
+const debug = Debug("ascii-rpg:server");
 
 const app = new App();
-app.start()
-  .then((port) => {
-    debug(`SERVER: http://localhost:${port}`);
-  });
+app.start().then((port) => {
+  debug(`SERVER: http://localhost:${port}`);
+});

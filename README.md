@@ -1,6 +1,21 @@
-# ASCII RPG
+<h1 align="center">ASCII RPG</h1>
 
-[![NPM Package](https://img.shields.io/badge/@pixelfox/ascii--rpg-1.0.0-red?logo=npm&style=flat-square)](https://www.npmjs.com/package/@pixelfox/ascii-rpg)
+<div align="center">
+
+[![npm package](https://img.shields.io/npm/v/@pixelfox/ascii-rpg?logo=npm&style=flat-square&color=red)](https://www.npmjs.org/package/node-telegram-bot-api)
+[![Build Status](https://travis-ci.org/PixelFoxGames/ascii-rpg.svg?branch=master)](https://travis-ci.org/PixelFoxGames/ascii-rpg)
+[![Coverage Status](https://codecov.io/gh/PixelFoxGames/ascii-rpg/branch/master/graph/badge.svg)](https://codecov.io/gh/PixelFoxGames/ascii-rpg)
+[![https://telegram.me/tihlok](https://img.shields.io/badge/💬%20Telegram-@tihlok-blue.svg?style=flat-square)](https://telegram.me/tihlok)
+
+<img src="https://codecov.io/gh/PixelFoxGames/ascii-rpg/branch/master/graphs/sunburst.svg"/>
+
+</div>
+
+## Install
+
+```sh
+yarn i
+```
 
 ## API
 

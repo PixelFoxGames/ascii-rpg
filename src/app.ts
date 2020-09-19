@@ -9,13 +9,15 @@ import _404Router from "./_404/_404.router";
 import DB from "./helpers/db";
 import Bot from "./telegram/bot";
 
-const debug = require("debug")("ascii-rpg:app");
+import Debug from "debug";
+
+const debug = Debug("ascii-rpg:app");
 
 export default class App {
   public app: express.Application;
 
-  private db: DB = new DB();
-  private bot: Bot = new Bot();
+  private readonly db: DB = new DB();
+  private readonly bot: Bot = new Bot();
   private routers = {};
   private middlewares = {};
 
@@ -27,11 +29,11 @@ export default class App {
     this.bot.setup();
   }
 
-  async start() {
+  async start(): Promise<number> {
     await this.db.connect();
 
     debug("starting...");
-    return new Promise(async resolve => {
+    return await new Promise((resolve) => {
       return this.app.listen(Environment.PORT, () => {
         debug("app started");
         return resolve(Environment.PORT);

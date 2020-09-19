@@ -1,25 +1,24 @@
-import TelegramContext from "../telegram-context";
 import Command from "./command";
 import UserService from "../../user/users.service";
 import UserModel from "../../user/model/users.model";
+import Debug from "debug";
+import { TelegrafContext } from "telegraf/typings/context";
 
-const debug = require("debug")("ascii-rpg:telegram:commands:start");
+const debug = Debug("ascii-rpg:telegram:commands:start");
 
 export default class StartCommand extends Command {
-  private static get _start() {
-    return async (context: TelegramContext) => {
+  private get _start() {
+    return async (context: TelegrafContext) => {
       const user: UserModel = await UserService.getUpdate({
-        user_id: context.id,
-        username: context.username,
-        first_name: context.name.first,
-        last_name: context.name.last
+        user_id: context.message.from.id,
+        username: `@${context.message.from.username}`,
       });
-      await context.send(`Hi ${user.username}`);
+      await context.reply(`Hi ${user.username}`);
     };
   }
 
   setup() {
     debug("setting up telegram bot:start command...");
-    this.command(/\/start/, StartCommand._start);
+    this.command("start", this._start);
   }
 }

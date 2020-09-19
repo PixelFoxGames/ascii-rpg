@@ -2,7 +2,7 @@ import { Application } from "express";
 import Context from "./context";
 
 export default abstract class Router {
-  private app: Application;
+  private readonly app: Application;
 
   constructor(app: Application) {
     this.app = app;

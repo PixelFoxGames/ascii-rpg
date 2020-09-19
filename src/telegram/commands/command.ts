@@ -1,22 +1,23 @@
-import * as TelegramBot from "node-telegram-bot-api";
-import TelegramContext from "../telegram-context";
+import Debug from "debug";
+import { Telegraf } from "telegraf";
+import { TelegrafContext } from "telegraf/typings/context";
 
-const debug = require("debug")("ascii-rpg:telegram:bot");
+const debug = Debug("ascii-rpg:telegram:bot");
 
 export default abstract class Command {
-  private readonly bot: TelegramBot;
+  private readonly bot: Telegraf<TelegrafContext>;
 
-  constructor(bot: TelegramBot) {
+  constructor(bot: Telegraf<TelegrafContext>) {
     this.bot = bot;
     this.setup();
   }
 
   abstract setup();
 
-  command(command: RegExp, execute: (context: TelegramContext) => void) {
-    this.bot.onText(command, async (message: TelegramBot.Message, match: RegExpExecArray | null) => {
-      debug(`[${message.from.id}:@${message.from.username}] ${match[0]}`);
-      return execute(new TelegramContext(this.bot, message, match, command));
+  command(command: string, execute: (ctx: TelegrafContext) => void) {
+    this.bot.command(command, (ctx, next) => {
+      debug(command);
+      return execute(ctx);
     });
   }
 }

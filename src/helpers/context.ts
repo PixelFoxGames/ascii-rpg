@@ -1,12 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import { HttpStatus } from "./http-status";
 
-const debug = require("debug")("ascii-rpg:helpers:context");
+import Debug from "debug";
+
+const debug = Debug("ascii-rpg:helpers:context");
 
 export default class Context {
-  private request: Request;
-  private response: Response;
-  private next: NextFunction;
+  private readonly request: Request;
+  private readonly response: Response;
+  private readonly next: NextFunction;
 
   constructor(request: Request, response: Response, next: NextFunction) {
     this.request = request;
@@ -29,10 +31,12 @@ export default class Context {
   notFound() {
     debug(`${this.request.method} ${this.request.path} 404:NOT_FOUND!`);
     this._respond(HttpStatus.NOT_FOUND, {
-      errors: [{
-        error: HttpStatus.NOT_FOUND,
-        message: `${this.request.method} ${this.request.path}`
-      }]
+      errors: [
+        {
+          error: HttpStatus.NOT_FOUND,
+          message: `${this.request.method} ${this.request.path}`,
+        },
+      ],
     });
   }
 }
