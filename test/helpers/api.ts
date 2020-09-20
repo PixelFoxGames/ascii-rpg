@@ -14,15 +14,12 @@ export default class API {
 
   private _request(method: string, url: string): Promise<any> {
     if (!API._started) {
-      debug("MockServer not started yet, booting up...");
       return API.application.start().then(() => {
-        debug("MockServer started!");
         API._started = true;
         return this._request(method, url);
       });
     }
 
-    debug(`requesting: ${method.toUpperCase()} ${url}`);
     const request = chai.request(API.application.app)[method](url);
     return new Promise((resolve, reject) => {
       return request.end((err, res) => (err ? reject(err) : resolve(res)));

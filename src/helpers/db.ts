@@ -27,11 +27,9 @@ export default class DB {
     }
 
     if (!DB.MONGOOSE) {
-      debug("DB not started yet, booting up...");
       return await this.connect().then(() => this.nuke());
     }
 
-    debug("Nuking DB...");
     return await DB.MONGOOSE.connection.db.dropDatabase();
   }
 
