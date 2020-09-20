@@ -29,7 +29,7 @@
     "typedoc": "typedoc",
     "typecheck": "tsc --noEmit",
     "pretest": "tsc -p .",
-    "test": "nyc mocha --require ts-node/register --timeout 120000 --exit 'test/**/*.spec.ts'",
+    "test": "DEBUG=ascii-rpg:* NODE_ENV=test nyc mocha --require ts-node/register --timeout 120000 --exit 'test/**/*.spec.ts'",
     "posttest": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "dependencies": {
@@ -63,7 +63,6 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.2.0",
     "mocha": "^8.1.3",
-    "mock-mongoose": "^8.0.1-a",
     "mocker-data-generator": "^2.9.0",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",

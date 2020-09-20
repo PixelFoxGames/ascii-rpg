@@ -2,10 +2,6 @@ import Hellper, { expect } from "../../helpers/hellper";
 import UserService from "../../../src/user/users.service";
 
 describe("User.Service", () => {
-  before((done) => {
-    Hellper.mock.init().then(() => done());
-  });
-
   beforeEach((done) => {
     Hellper.mock.nuke().then(() => done());
   });

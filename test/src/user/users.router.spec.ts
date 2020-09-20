@@ -1,10 +1,6 @@
 import Hellper from "../../helpers/hellper";
 
 describe("User.Router", () => {
-  before((done) => {
-    Hellper.mock.init().then(() => done());
-  });
-
   beforeEach((done) => {
     Hellper.mock.nuke().then(() => done());
   });

@@ -1,10 +1,9 @@
-import { MockMongoose } from "mock-mongoose";
-import mongoose from "mongoose";
 import mocker from "mocker-data-generator";
 import mockData from "./mock.data";
 import UserService from "../../src/user/users.service";
 import UserModel from "../../src/user/model/users.model";
 import Debug from "debug";
+import DB from "../../src/helpers/db";
 
 const debug = Debug("ascii-rpg:test:mock");
 
@@ -22,28 +21,14 @@ interface IUser {
 
 export default class Mock {
   private readonly data = mockData;
-  private readonly db = new MockMongoose(mongoose);
+  private readonly db = new DB();
 
   get user(): IUser {
     return this.generateUsersMockData(1)[0];
   }
 
-  init() {
-    debug("Initializing MockDB...");
-    return this.db
-      .prepareStorage()
-      .then(() => {
-        debug("mockdb done, nuking...");
-        return this.nuke();
-      })
-      .then(() => {
-        debug("nuke done");
-      })
-      .catch((e) => debug("ops", e));
-  }
-
   nuke() {
-    return this.db.helper.reset();
+    return this.db.nuke();
   }
 
   async createUsers(amount: number): Promise<UserModel[]> {
