@@ -1,11 +1,12 @@
 import { config } from "dotenv";
 
-config();
-config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env" });
-
 export default class Environment {
+  static get ENV(): string {
+    return process.env.NODE_ENV || "dev";
+  }
+
   static get isTEST(): boolean {
-    return process.env.NODE_ENV.includes("test");
+    return this.ENV.includes("test");
   }
 
   static get FORCE_NUKE(): boolean {
@@ -17,10 +18,12 @@ export default class Environment {
   }
 
   static get DB_URI(): string {
-    return this.isTEST ? `${process.env.DB_URI}_test` : process.env.DB_URI;
+    return process.env.DB_URI;
   }
 
   static get TELEGRAM_API_TOKEN(): string {
     return process.env.TELEGRAM_API_TOKEN;
   }
 }
+
+config({ path: `.env.${Environment.ENV}` });
