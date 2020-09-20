@@ -4,6 +4,9 @@ import mocker from "mocker-data-generator";
 import mockData from "./mock.data";
 import UserService from "../../src/user/users.service";
 import UserModel from "../../src/user/model/users.model";
+import Debug from "debug";
+
+const debug = Debug("ascii-rpg:test:mock");
 
 interface IUser {
   id: number;
@@ -26,7 +29,17 @@ export default class Mock {
   }
 
   init() {
-    return this.db.prepareStorage().then(() => this.nuke());
+    debug("Initializing MockDB...");
+    return this.db
+      .prepareStorage()
+      .then(() => {
+        debug("mockdb done, nuking...");
+        return this.nuke();
+      })
+      .then(() => {
+        debug("nuke done");
+      })
+      .catch((e) => debug("ops", e));
   }
 
   nuke() {

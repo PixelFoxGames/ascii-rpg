@@ -29,7 +29,7 @@
     "typedoc": "typedoc",
     "typecheck": "tsc --noEmit",
     "pretest": "tsc -p .",
-    "test": "nyc mocha --require ts-node/register --timeout 120000 --exit --inspect 'test/**/*.spec.ts'",
+    "test": "nyc mocha --require ts-node/register --timeout 120000 --exit 'test/**/*.spec.ts'",
     "posttest": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "dependencies": {

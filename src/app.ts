@@ -30,9 +30,9 @@ export default class App {
   }
 
   async start(): Promise<number> {
+    debug("starting...");
     await this.db.connect();
 
-    debug("starting...");
     return await new Promise((resolve) => {
       return this.app.listen(Environment.PORT, () => {
         debug("app started");
