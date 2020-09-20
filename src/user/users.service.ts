@@ -1,40 +1,27 @@
-import UserModel from "./model/users.model";
-import UserSchema from "./model/users.schema";
+import User from "./model/users.model";
+import { IUser, IUserDocument } from "./model/users.types";
 
-export default class UserService {
-  static async findAll(): Promise<UserModel[] | Error> {
-    return await new Promise((resolve, reject) => {
-      return UserSchema.find((err, users) => (err ? reject(err) : resolve(users.map((u) => UserModel.fromDocument(u)))));
-    });
+export default class UsersService {
+  static async getAll(): Promise<IUserDocument[]> {
+    return await User.find({});
   }
 
-  static async findByID(userID: number | Number): Promise<UserModel> {
-    return await new Promise((resolve, reject) => {
-      return UserSchema.findOne({ user_id: userID }, UserService.parseUser(reject, resolve));
-    });
+  static async getByUserID(userID: number): Promise<IUserDocument> {
+    return await User.findOne({ user_id: userID });
   }
 
-  static async update(userModel: UserModel): Promise<UserModel> {
-    return await new Promise((resolve, reject) => {
-      delete userModel._id;
-      delete userModel.is_deleted;
-      return UserSchema.findOneAndUpdate({ user_id: userModel.user_id }, userModel, UserService.parseUser(reject, resolve));
-    }).then(() => this.findByID(userModel.user_id));
+  static async getUpdate(user: IUser): Promise<IUserDocument> {
+    const existing = await this.getByUserID(user.user_id);
+    return existing ? await this.update(user) : await this.create(user);
   }
 
-  static async getUpdate(userModel: UserModel): Promise<UserModel> {
-    userModel = UserModel.fromDocument(userModel);
-    const existing = await this.findByID(userModel.user_id);
-    return existing ? await this.update(userModel) : await this.create(userModel);
+  static async update(user: IUser): Promise<IUserDocument> {
+    delete user.is_deleted;
+    const updated: IUserDocument = await User.findOneAndUpdate({ user_id: user.user_id }, user);
+    return await this.getByUserID(updated.user_id);
   }
 
-  static async create(userModel: UserModel): Promise<UserModel> {
-    const user: any = new UserSchema(userModel);
-    await user.save();
-    return await this.findByID(user.user_id);
-  }
-
-  static parseUser(reject, resolve) {
-    return (err, user) => (err ? reject(err) : resolve(user ? UserModel.fromDocument(user) : null));
+  static async create(user: IUser): Promise<IUserDocument> {
+    return await User.create(user);
   }
 }

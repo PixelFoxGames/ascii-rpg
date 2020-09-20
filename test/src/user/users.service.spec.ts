@@ -1,26 +1,27 @@
 import Hellper, { expect } from "../../helpers/hellper";
-import UserService from "../../../src/user/users.service";
+import UsersService from "../../../src/user/users.service";
+import { IUserDocument } from "../../../src/user/model/users.types";
 
 describe("User.Service", () => {
   beforeEach((done) => {
     Hellper.mock.nuke().then(() => done());
   });
 
-  it("should findByID, empty", (done) => {
-    UserService.findByID(Hellper.mock.user.id)
-      .then((user) => {
+  it("should getByUserID, empty", (done) => {
+    UsersService.getByUserID(Hellper.mock.user.id)
+      .then((user: IUserDocument) => {
         expect(user).to.be.null;
       })
       .then(() => done())
       .catch(done);
   });
 
-  it("should findByID", (done) => {
+  it("should getByUserID", (done) => {
     Hellper.mock
       .createUsers(1)
-      .then((users) => UserService.findByID(users[0].user_id))
-      .then((user) => {
-        user._id.should.not.be.null;
+      .then((users) => UsersService.getByUserID(users[0].user_id))
+      .then((user: IUserDocument) => {
+        user.id.should.not.be.null;
         user.user_id.should.not.be.null;
         user.username.should.not.be.null;
         user.first_name.should.not.be.null;
@@ -30,9 +31,9 @@ describe("User.Service", () => {
       .catch(done);
   });
 
-  it("should findAll, empty", (done) => {
-    UserService.findAll()
-      .then((users) => {
+  it("should getAll, empty", (done) => {
+    UsersService.getAll()
+      .then((users: IUserDocument[]) => {
         users.should.be.a("array");
         users.should.have.lengthOf(0);
       })
@@ -40,11 +41,11 @@ describe("User.Service", () => {
       .catch(done);
   });
 
-  it("should findByID, 1 user", (done) => {
+  it("should getByUserID, 1 user", (done) => {
     Hellper.mock
       .createUsers(1)
-      .then(() => UserService.findAll())
-      .then((users) => {
+      .then(() => UsersService.getAll())
+      .then((users: IUserDocument[]) => {
         users.should.be.a("array");
         users.should.have.lengthOf(1);
       })
@@ -52,11 +53,11 @@ describe("User.Service", () => {
       .catch(done);
   });
 
-  it("should findByID, 10 users", (done) => {
+  it("should getByUserID, 10 users", (done) => {
     Hellper.mock
       .createUsers(10)
-      .then(() => UserService.findAll())
-      .then((users) => {
+      .then(() => UsersService.getAll())
+      .then((users: IUserDocument[]) => {
         users.should.be.a("array");
         users.should.have.lengthOf(10);
       })
@@ -69,9 +70,9 @@ describe("User.Service", () => {
       .createUsers(1)
       .then((users) => {
         users[0].username = "TOTORO";
-        return UserService.update(users[0]);
+        return UsersService.update(users[0]);
       })
-      .then((user) => {
+      .then((user: IUserDocument) => {
         user.should.be.a("object");
         user._id.should.not.be.null;
         user.user_id.should.not.be.null;
@@ -84,11 +85,11 @@ describe("User.Service", () => {
   });
 
   it("should getUpdate, non existing", (done) => {
-    UserService.getUpdate({
+    UsersService.getUpdate({
       user_id: 9999999,
       username: "@username",
     })
-      .then((user) => {
+      .then((user: IUserDocument) => {
         user.user_id.should.be.equal(9999999);
         user.username.should.be.equal("@username");
       })
@@ -100,14 +101,14 @@ describe("User.Service", () => {
     Hellper.mock
       .createUsers(1)
       .then((users) => {
-        return UserService.getUpdate({
+        return UsersService.getUpdate({
           user_id: users[0].user_id,
           username: "@TOTORO",
         });
       })
-      .then((user) => {
+      .then((user: IUserDocument) => {
         user.should.be.a("object");
-        user._id.should.not.be.null;
+        user.id.should.not.be.null;
         user.user_id.should.not.be.null;
         user.username.should.be.equal("@TOTORO");
         user.first_name.should.not.be.null;
