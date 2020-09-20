@@ -24,10 +24,6 @@ export default class Context {
     this._respond(HttpStatus.SUCCESS, body);
   }
 
-  created(body: any) {
-    this._respond(HttpStatus.CREATED, body);
-  }
-
   notFound() {
     debug(`${this.request.method} ${this.request.path} 404:NOT_FOUND!`);
     this._respond(HttpStatus.NOT_FOUND, {

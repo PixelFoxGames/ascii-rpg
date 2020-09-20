@@ -5,6 +5,20 @@ describe("User.Router", () => {
     Hellper.mock.nuke().then(() => done());
   });
 
+  it("should not GET /api/v1/u, 404", (done) => {
+    Hellper.api
+      .get("/api/v1/u")
+      .then((response) => {
+        response.statusCode.should.be.equal(404);
+        response.body.errors.should.be.a("array");
+        response.body.errors.should.have.lengthOf(1);
+        response.body.errors[0].error.should.be.equal(404);
+        response.body.errors[0].message.should.be.equal("GET /api/v1/u");
+      })
+      .then(() => done())
+      .catch(done);
+  });
+
   it("should test GET /api/v1/users, empty", (done) => {
     Hellper.api
       .get("/api/v1/users")

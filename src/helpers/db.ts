@@ -23,7 +23,7 @@ export default class DB {
   async nuke(): Promise<void> {
     if (!Environment.isTEST && !Environment.FORCE_NUKE) {
       debug("Trying to nuke non TEST environment, aborting...");
-      return;
+      throw new Error("Trying to nuke non TEST environment, aborting...");
     }
 
     if (!DB.MONGOOSE) {
