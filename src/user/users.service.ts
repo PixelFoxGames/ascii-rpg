@@ -3,11 +3,11 @@ import { IUser, IUserDocument } from "./model/users.types";
 
 export default class UsersService {
   static async getAll(): Promise<IUserDocument[]> {
-    return await User.find({});
+    return await User.find({}).populate("inventory");
   }
 
   static async getByUserID(userID: number): Promise<IUserDocument> {
-    return await User.findOne({ user_id: userID });
+    return await User.findOne({ user_id: userID }).populate("inventory");
   }
 
   static async getUpdate(user: IUser): Promise<IUserDocument> {

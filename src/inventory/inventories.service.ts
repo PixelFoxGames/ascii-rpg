@@ -1,17 +1,13 @@
 import Inventory from "./model/inventories.model";
-import { IUserDocument } from "../user/model/users.types";
+import { IInventoryDocument } from "./model/inventories.types";
 
 export default class InventoriesService {
-  static async getByUserID(userID: number): Promise<IUserDocument> {
-    return await Inventory.findOne({ user_id: userID });
-  }
-
-  static async get(userID: number): Promise<IUserDocument> {
-    const existing = await this.getByUserID(userID);
+  static async getByUserID(userID: number): Promise<IInventoryDocument> {
+    const existing = await await Inventory.findOne({ user_id: userID });
     return existing || (await this.create(userID));
   }
 
-  static async create(userID: number): Promise<IUserDocument> {
+  static async create(userID: number): Promise<IInventoryDocument> {
     return await Inventory.create({ user_id: userID });
   }
 }

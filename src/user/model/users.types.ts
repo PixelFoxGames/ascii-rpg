@@ -1,5 +1,5 @@
 import { Document } from "mongoose";
-import { IInventory } from "../../inventory/model/inventories.types";
+import { IInventoryDocument } from "../../inventory/model/inventories.types";
 
 export interface IUser {
   user_id?: number;
@@ -7,7 +7,7 @@ export interface IUser {
   first_name?: string;
   last_name?: string;
   is_deleted?: boolean;
-  inventory?: IInventory;
+  inventory?: IInventoryDocument;
 }
 
 export interface IUserDocument extends IUser, Document {}
