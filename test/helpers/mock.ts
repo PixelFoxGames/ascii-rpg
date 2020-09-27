@@ -1,8 +1,8 @@
 import mocker from "mocker-data-generator";
 import mockData from "./mock.data";
-import UsersService from "../../src/user/users.service";
+import PlayersService from "../../src/players/players.service";
 import DB from "../../src/helpers/db";
-import { IUser } from "../../src/user/model/users.types";
+import { PlayerDoc, PlayerProps } from "../../src/players/players.schema";
 
 interface MockUser {
   id: number;
@@ -28,15 +28,15 @@ export default class Mock {
     return this.db.nuke();
   }
 
-  async createUsers(amount: number): Promise<IUser[]> {
+  async createPlayers(amount: number): Promise<PlayerDoc[]> {
     const mockedUsers = this.generateUsersMockData(amount);
     const promises = mockedUsers.map((u) =>
-      UsersService.create({
+      PlayersService.create({
         user_id: u.id,
         first_name: u.first_name,
         last_name: u.last_name,
         username: u.username,
-      })
+      } as PlayerProps),
     );
     return await Promise.all(promises);
   }

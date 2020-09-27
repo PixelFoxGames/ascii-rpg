@@ -1,8 +1,6 @@
-import mongoose, { Mongoose } from "mongoose";
-
-import Environment from "./environment";
-
 import Debug from "debug";
+import mongoose, { Mongoose } from "mongoose";
+import Environment from "./environment";
 
 const debug = Debug("ascii-rpg:helpers:db");
 
@@ -12,7 +10,7 @@ export default class DB {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false,
+    useFindAndModify: false
   };
 
   async connect(): Promise<Mongoose> {

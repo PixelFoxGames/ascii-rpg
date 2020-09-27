@@ -11,15 +11,15 @@ export default abstract class Router {
 
   public abstract route();
 
-  all(endpoint: string, controller: (context: Context) => void) {
+  all(endpoint: string, controller: (ctx: Context) => void) {
     this.app.all(endpoint, this._inject(controller));
   }
 
-  get(endpoint: string, controller: (context: Context) => void) {
+  get(endpoint: string, controller: (ctx: Context) => void) {
     this.app.get(endpoint, this._inject(controller));
   }
 
-  private _inject(controller: (context: Context) => void) {
+  private _inject(controller: (ctx: Context) => void): (req, res, next) => void {
     return (req, res, next) => controller(new Context(req, res, next));
   }
 }

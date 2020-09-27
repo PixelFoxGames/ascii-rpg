@@ -1,10 +1,11 @@
+import "./extensions";
 import express from "express";
 import bodyParser from "body-parser";
 
 import Environment from "./helpers/environment";
 import Logger from "./middlewares/logger";
 
-import UsersRouter from "./user/users.router";
+import PlayersRouter from "./players/players.router";
 import _404Router from "./_404/_404.router";
 import DB from "./helpers/db";
 import Bot from "./telegram/bot";
@@ -54,7 +55,7 @@ export default class App {
 
   private routesSetup() {
     debug("setting up routes...");
-    this.routers["user"] = new UsersRouter(this.app);
+    this.routers["user"] = new PlayersRouter(this.app);
     this.routers["404"] = new _404Router(this.app);
   }
 }

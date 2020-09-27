@@ -27,7 +27,19 @@ yarn
 
 ## Changes Log
 
+## [v1.1.0] 2020-09-27 - @tihlok
+
+- inventory system
+- auto updating currencies
+- stats system
+- auto updating stats (hp,soul)
+- config system
+- updated deps
+- refactorings
+- a lot of things
+
 ## [v1.0.0] 2020-09-17 - @tihlok
+
 - Initializing Project
 
 ## License

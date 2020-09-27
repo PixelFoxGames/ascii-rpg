@@ -30,9 +30,9 @@ export default class Context {
       errors: [
         {
           error: HttpStatus.NOT_FOUND,
-          message: `${this.request.method} ${this.request.path}`,
-        },
-      ],
+          message: `${this.request.method} ${this.request.path}`
+        }
+      ]
     });
   }
 }

@@ -9,6 +9,10 @@ export default class Environment {
     return this.ENV.includes("test");
   }
 
+  static get isDEV(): boolean {
+    return this.ENV.includes("dev");
+  }
+
   static get FORCE_NUKE(): boolean {
     return !!process.env.FORCE_NUKE;
   }
@@ -23,6 +27,10 @@ export default class Environment {
 
   static get TELEGRAM_API_TOKEN(): string {
     return process.env.TELEGRAM_API_TOKEN;
+  }
+
+  static get STEP_TIME_MS(): number {
+    return parseInt(process.env.STEP_TIME_MS);
   }
 }
 

@@ -9,7 +9,8 @@
     "noImplicitAny": false,
     "removeComments": true,
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "include": [
     "test/**/*.ts",

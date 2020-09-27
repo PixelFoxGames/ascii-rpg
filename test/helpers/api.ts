@@ -1,8 +1,5 @@
 import App from "../../src/app";
 import chai from "chai";
-import Debug from "debug";
-
-const debug = Debug("ascii-rpg:test:api");
 
 export default class API {
   private static readonly application: App = new App();

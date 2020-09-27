@@ -1,0 +1,28 @@
+{
+  "warrior": {
+    "name": "warrior",
+    "baseHP": {
+      "current": 16,
+      "max": 16,
+      "step": 2
+    },
+    "baseSoul": {
+      "current": 10,
+      "max": 10,
+      "step": 1
+    }
+  },
+  "mage": {
+    "name": "mage",
+    "baseHP": {
+      "current": 10,
+      "max": 10,
+      "step": 1
+    },
+    "baseSoul": {
+      "current": 16,
+      "max": 16,
+      "step": 2
+    }
+  }
+}
